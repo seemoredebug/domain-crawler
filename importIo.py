@@ -2,11 +2,11 @@ import xml.etree.ElementTree as ET
 import requests
 import json
 
-class ImportIoApiClient:
+class CrawlBaseApiClient:
     def __init__(self, token):
         self.token = token
 
-    def requestImportIo(self, url):
+    def requestCrawlBase(self, url):
         import_io_url = f'https://api.crawlbase.com/scraper?token={self.token}&url={url}'
 
         response = requests.get(import_io_url)
@@ -28,11 +28,12 @@ if __name__ == '__main__':
     token = '_2lOWoqVxl4_ZfaYEd1XBA'
     file_path = '../sitemap-generator/debug/sitemap2.xml'
 
-    client = ImportIoApiClient(token)
-    urls = client.extract_urls_from_xml(file_path)
+    client = CrawlBaseApiClient(token)
+    # urls = client.extract_urls_from_xml(file_path)
 
-    url = urls[16]
-    print(url)
+    # url = urls[16]
+    # print(url)
 
-    import_io_data = client.requestImportIo(url)
+    url = "https://new8.wehomeshop.com/product/myzh7etaxs?c=SA&lang=en-US"
+    import_io_data = client.requestCrawlBase(url)
     print(json.dumps(import_io_data))
